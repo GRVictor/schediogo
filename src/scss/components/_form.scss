@@ -1,0 +1,37 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+.form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; // Centra los elementos horizontalmente
+    justify-content: center; // Centra los elementos verticalmente
+}
+
+.field {
+    display: flex;
+    flex-direction: column; // Cambia la dirección del flex a columna
+    margin-bottom: 2rem;
+    align-items: center; // Alinea los elementos al centro
+
+    label {
+        margin-bottom: 0.5rem; // Añade un margen inferior para separar el label del input
+        text-align: center; // Centra el texto del label
+        width: 100%; // Asegura que el label ocupe todo el ancho disponible
+    }
+
+    input {
+        width: 100%; // Asegura que el input ocupe todo el ancho disponible
+        max-width: 500px; // Limita el ancho máximo del input
+        text-align: center; // Centra el texto del input
+        all: unset;
+        border: 2px solid v.$black;
+        padding: calc(v.$spacing / 4);
+        border-radius: 1rem;
+
+        &::placeholder {
+            text-align: center; // Centra el texto del placeholder
+        }
+    }
+}

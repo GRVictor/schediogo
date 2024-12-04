@@ -1,0 +1,19 @@
+{
+    "name": "victor/schediogo",
+    "description": "Booking application made in php",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "MVC\\": "./",
+            "Controllers\\": "./controllers",
+            "Model\\": "./models"
+        }
+    },
+    "authors": [
+        {
+            "name": "Victor García",
+            "email": "grojasvictor@gmail.com"
+        }
+    ],
+    "require": {}
+}
