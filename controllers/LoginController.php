@@ -21,8 +21,10 @@ class LoginController {
         echo 'Desde Recover';
     }
 
-    public static function signIn() {
-        echo 'Desde SignIn';
+    public static function signIn(Router $router) {
+        $router->render('auth/sign-in', [
+            
+        ]);
     }
 
 }

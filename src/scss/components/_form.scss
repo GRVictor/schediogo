@@ -16,19 +16,21 @@
     align-items: center; // Alinea los elementos al centro
 
     label {
-        margin-bottom: 0.5rem; // Añade un margen inferior para separar el label del input
+        margin-bottom: 1rem; // Añade un margen inferior para separar el label del input
         text-align: center; // Centra el texto del label
         width: 100%; // Asegura que el label ocupe todo el ancho disponible
     }
 
     input {
-        width: 100%; // Asegura que el input ocupe todo el ancho disponible
-        max-width: 500px; // Limita el ancho máximo del input
-        text-align: center; // Centra el texto del input
         all: unset;
+        width: 100%; // Asegura que el input ocupe todo el ancho disponible
+        text-align: center; // Centra el texto del input
         border: 2px solid v.$black;
         padding: calc(v.$spacing / 4);
         border-radius: 1rem;
+        @include m.phone {
+            width: 30rem;
+        }
 
         &::placeholder {
             text-align: center; // Centra el texto del placeholder

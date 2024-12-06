@@ -1,5 +1,3 @@
-<img class="logo" src="../build/img/logo.webp" alt="logo">
-
 <h1 class="page-name">Iniciar Sesión</h1>
 <p class="page-description">Bienvenido, inicia sesión con tu datos</p>
 

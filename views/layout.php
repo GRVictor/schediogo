@@ -18,6 +18,7 @@
 
         </div>
         <div class="app">
+            <img class="logo" src="../build/img/logo.webp" alt="logo">
             <?php echo $content; ?>
         </div>
     </div>
