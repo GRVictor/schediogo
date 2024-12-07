@@ -13,8 +13,9 @@ class LoginController {
         echo 'Desde Logout';
     }
 
-    public static function forgot() {
-        echo 'Desde Forgot';
+    public static function forgot(Router $router) {
+        
+        $router->render('auth/forgot');
     }
 
     public static function recover() {
