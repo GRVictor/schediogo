@@ -2,7 +2,9 @@
 
 namespace Controllers;
 
+use Model\User;
 use MVC\Router;
+
 
 class LoginController {
     public static function login(Router $router) {
@@ -22,9 +24,26 @@ class LoginController {
         echo 'Desde Recover';
     }
 
-    public static function signIn(Router $router) {
-        $router->render('auth/sign-in', [
-            
+    public static function signUp(Router $router) {
+        $user = new User;
+
+        // Empty alerts
+        $alerts = [];
+        
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $user->sync($_POST);
+            $alerts = $user->validateNewAccount();
+
+            // If there are no errors, the array alerts is empty
+            if(empty($alerts)) {
+                // Validate if the user already exists
+            }
+
+        }
+
+        $router->render('auth/sign-up', [
+            'user' => $user,
+            'alerts' => $alerts
         ]);
     }
 

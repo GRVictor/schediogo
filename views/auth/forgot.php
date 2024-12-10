@@ -5,7 +5,7 @@
 
     <div class="field">
         <label for="email">Email</label>
-        <input type="email" id="email" name="email" placeholder="ejemplo@ejemplo.com" required> 
+        <input type="email" id="email" name="email" placeholder="ejemplo@ejemplo.com"> 
     </div>
 
     <input type="submit" class="btn btn-primary" value="Enviar">
@@ -14,5 +14,5 @@
 
 <div class="actions">
     <a href="/">¿Ya tienes una cuenta? Inicia sesión</a>
-    <a href="/sign-in">Crear una cuenta</a>
+    <a href="/sign-up">Crear una cuenta</a>
 </div>

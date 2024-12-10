@@ -17,6 +17,6 @@
 </form>
 
 <div class="actions">
-    <a href="/sign-in">Crea una cuenta</a>
+    <a href="/sign-up">Crea una cuenta</a>
     <a href="/forgot">Olvide mi contraseña</a>
 </div>
