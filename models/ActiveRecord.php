@@ -118,7 +118,14 @@ class ActiveRecord {
 
     // Obtener Registros con cierta cantidad
     public static function get($limit) {
-        $query = "SELECT * FROM " . static::$table . " LIMIT {$limite}";
+        $query = "SELECT * FROM " . static::$table . " LIMIT {$limit}";
+        $result = self::querySQL($query);
+        return array_shift( $result ) ;
+    }
+
+    // Busca un registro por su id
+    public static function where($column, $value) {
+        $query = "SELECT * FROM " . static::$table  ." WHERE ${column} = '{$value}'";
         $result = self::querySQL($query);
         return array_shift( $result ) ;
     }
@@ -129,11 +136,11 @@ class ActiveRecord {
         $attributes = $this->sanitizeAttributes();
 
         // Insertar en la base de datos
-        $query = " INSERT INTO " . static::$table . " ( ";
+        $query = "INSERT INTO " . static::$table . " (";
         $query .= join(', ', array_keys($attributes));
-        $query .= " ) VALUES (' "; 
+        $query .= ") VALUES ('";
         $query .= join("', '", array_values($attributes));
-        $query .= " ') ";
+        $query .= "')";
 
         // Resultado de la consulta
         $result = self::$db->query($query);
