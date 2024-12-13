@@ -66,6 +66,21 @@ class User extends ActiveRecord {
         return self::$alerts;
     }
 
+    public function validateLogin() {
+        if(!$this->email || trim($this->email) === '') {
+            self::$alerts['error'][] = 'El email es obligatorio';
+        } else if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
+            self::$alerts['error'][] = 'El email tiene un formato incorrecto';
+        }
+
+        if(!$this->password) {
+            self::$alerts['error'][] = 'La contraseña es obligatoria';
+        }
+
+        return self::$alerts;
+
+    }
+
     // Check if user exists
     public function userExists() {
         $query = "SELECT * FROM " . self::$table . " WHERE email = '" . $this->email . "' LIMIT 1";
@@ -87,6 +102,17 @@ class User extends ActiveRecord {
         $this->token = bin2hex(random_bytes(10));
     }
 
-    
+    public function validatePassword($password) {
+        $result = password_verify($password, $this->password);
+
+        if(!$result) {
+            self::$alerts['error'][] = 'La contraseña es incorrecta';
+        } else if(!$this->confirmed) {
+            self::$alerts['error'][] = 'La cuenta no está confirmada';
+        } else {
+            return true;
+        }
+
+    }
 
 }
