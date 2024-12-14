@@ -42,7 +42,6 @@ class LoginController {
 
                     
                 } else {
-                    
                     User::setAlert('error', 'El usuario no existe');
                 }
 
@@ -65,11 +64,89 @@ class LoginController {
 
     public static function forgot(Router $router) {
         
-        $router->render('auth/forgot');
+        $alerts = [];
+
+        if($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $auth = new User($_POST);
+            $alerts = $auth->validateEmail();
+
+            if(empty($alerts)) {
+                $user = User::where('email', $auth->email);
+
+                if($user && $user->confirmed === "1") {
+                    // Generate token
+                    $user->generateToken();
+
+                    // Save token
+                    $user->save();
+
+                    User::setAlert('success', 'Revisa tu email para recuperar tu contraseña');
+
+                    // Send email
+                    $email = new Email($user->email, $user->name, $user->token);
+                    $email->sendInstructions();
+
+                } else if ($user && $user->confirmed === 0) {
+                    User::setAlert('error', 'Cuenta no confirmada, revisa tu email');
+                } else {
+                    User::setAlert('error', 'El usuario no existe');
+                }
+            } 
+
+        }
+
+        $alerts = User::getAlerts();
+
+        $router->render('auth/forgot', [
+            'alerts' => $alerts
+        ]);
     }
 
-    public static function recover() {
-        echo 'Desde Recover';
+    public static function recover(Router $router) {
+
+        $alerts = [];
+        $error = false;
+
+        $token = s($_GET['token']);
+
+        // Search for user with token
+        $user = User::where('token', $token);
+
+        if(empty($user)) {
+            User::setAlert('error', 'Token no válido');
+            $error = true;
+        }
+
+        if($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $password = new User($_POST);
+            $alerts = $password->validateNewPassword();
+
+            if(empty($alerts)) {
+                // Save new password
+                $user->password = null;
+                $user->password = $password->password;
+                $user->hashPassword();
+                $user->token = '';
+                $result = $user->save();
+
+                if($result) {
+                    // Crear mensaje de exito
+                    User::setAlert('success', 'Contraseña actualizada, inicia sesión');
+                                    
+                    // Redireccionar al login tras 3 segundos
+                    header('Refresh: 3; url=/');
+                }
+
+            }
+
+        }
+        
+        $alerts = User::getAlerts();
+
+        $router->render('auth/recover', [
+            'alerts' => $alerts,
+            'error' => $error
+        ]);
     }
 
     public static function signUp(Router $router) {

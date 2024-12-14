@@ -54,7 +54,7 @@ class User extends ActiveRecord {
         if(!$this->password) {
             self::$alerts['error'][] = 'La contraseña es obligatoria';
         } else {
-            if(strlen($this->password) < 8) {
+            if(strlen($this->password) < 6) {
                 self::$alerts['error'][] = 'La contraseña debe tener al menos 6 caracteres';
             }
     
@@ -79,6 +79,32 @@ class User extends ActiveRecord {
 
         return self::$alerts;
 
+    }
+
+    public function validateNewPassword() {
+        if(!$this->password) {
+            self::$alerts['error'][] = 'La contraseña es obligatoria';
+        } else {
+            if(strlen($this->password) < 6) {
+                self::$alerts['error'][] = 'La contraseña debe tener al menos 6 caracteres';
+            }
+    
+            if(!preg_match('/[\W]/', $this->password)) {
+                self::$alerts['error'][] = 'La contraseña debe contener al menos un símbolo';
+            }
+        }
+
+        return self::$alerts;
+    }
+
+    public function validateEmail() {
+        if(!$this->email || trim($this->email) === '') {
+            self::$alerts['error'][] = 'El email es obligatorio';
+        } else if (!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
+            self::$alerts['error'][] = 'El email tiene un formato incorrecto';
+        }
+
+        return self::$alerts;
     }
 
     // Check if user exists
