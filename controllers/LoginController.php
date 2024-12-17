@@ -36,7 +36,7 @@ class LoginController {
                             $_SESSION['admin'] = $user->admin ?? null;
                             header('Location: /admin');
                         } else {
-                            header('Location: /date');
+                            header('Location: /appointment');
 
                     }
 

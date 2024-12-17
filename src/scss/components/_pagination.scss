@@ -1,0 +1,18 @@
+@use 'base/variables' as v;
+@use 'base/mixins' as m;
+
+.pagination {
+    padding: v.$spacing 0;
+    
+    @include m.tablet {
+        display: flex;
+    }
+
+    .space {
+        visibility: hidden;
+    }
+
+    button {
+        margin: 0 0 1rem 0;
+    }
+}

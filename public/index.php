@@ -3,6 +3,7 @@
 require_once __DIR__ . '/../includes/app.php';
 
 use Controllers\LoginController;
+use Controllers\AppointmentController;
 use MVC\Router;
 
 $router = new Router();
@@ -25,6 +26,9 @@ $router->post('/sign-up', [LoginController::class, 'signUp']);
 // Confirmar cuenta
 $router->get('/activate', [LoginController::class, 'activate']);
 $router->get('/message', [LoginController::class, 'message']);
+
+// Private Area
+$router->get('/appointment', [AppointmentController::class, 'index']);
 
 
 // Comprueba y valida las rutas, que existan y les asigna las funciones del Controlador

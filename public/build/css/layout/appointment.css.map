@@ -1,0 +1,1 @@
+{"version":3,"sourceRoot":"","sources":["layout/appointment.scss"],"names":[],"mappings":"AAAA,SAEI,eACA,aAGJ,MACI,cAEJ,MACI","file":"layout/appointment.css","sourcesContent":[".section {\r\n\r\n    padding: 2rem 0;\r\n    display: none;\r\n}\r\n\r\n.show {\r\n    display: block;\r\n}\r\n.hide {\r\n    display: none;\r\n}"]}

@@ -35,5 +35,9 @@
         &::placeholder {
             text-align: center; // Centra el texto del placeholder
         }
+
+        &:disabled {
+            cursor: not-allowed;
+        }
     }
 }
