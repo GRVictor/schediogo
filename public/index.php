@@ -4,6 +4,7 @@ require_once __DIR__ . '/../includes/app.php';
 
 use Controllers\LoginController;
 use Controllers\AppointmentController;
+use Controllers\APIController;
 use MVC\Router;
 
 $router = new Router();
@@ -30,6 +31,8 @@ $router->get('/message', [LoginController::class, 'message']);
 // Private Area
 $router->get('/appointment', [AppointmentController::class, 'index']);
 
+// Apointment API
+$router->get('/api/services', [APIController::class, 'index']);
 
 // Comprueba y valida las rutas, que existan y les asigna las funciones del Controlador
 $router->checkRoutes();
