@@ -25,12 +25,21 @@
 
         &:hover {
             transform: scale(1.05);
+            cursor: pointer;
         }
 
         p {
             color: v.$white;
             margin: 0 0 calc(v.$spacing / 4) 0;
-        }.service-price {
+            -webkit-touch-callout: none;    /* iOS Safari */
+            -webkit-user-select: none;      /* Safari */
+            -khtml-user-select: none;       /* Konqueror HTML */
+            -moz-user-select: none;         /* Old versions of Firefox */
+            -ms-user-select: none;          /* Internet Explorer/Edge */
+            user-select: none;              /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+        }
+        
+        .service-price {
             color: v.$creme;
             font-weight: v.$bold;
             font-size: 3rem;

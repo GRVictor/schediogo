@@ -15,6 +15,7 @@
     margin-bottom: 2rem;
     align-items: center; // Alinea los elementos al centro
 
+    
     label {
         margin-bottom: 1rem; // Añade un margen inferior para separar el label del input
         text-align: center; // Centra el texto del label
@@ -40,4 +41,19 @@
             cursor: not-allowed;
         }
     }
+
+    .name-input {
+        border: none;
+        border-radius: 0;
+        border-bottom: 2px solid v.$black;
+        font-weight: v.$bold;
+        pointer-events: none;           // Desactiva todos los eventos del ratón
+        -webkit-touch-callout: none;    /* iOS Safari */
+        -webkit-user-select: none;      /* Safari */
+        -khtml-user-select: none;       /* Konqueror HTML */
+        -moz-user-select: none;         /* Old versions of Firefox */
+        -ms-user-select: none;          /* Internet Explorer/Edge */
+        user-select: none;              /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+    }
+
 }

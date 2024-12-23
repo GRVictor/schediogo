@@ -138,17 +138,21 @@ function selectService(service) {
     const { id } = service;
     const { services } = appoinment;
 
-    // Verificar si el servicio ya está seleccionado
+    // Find the service that was clicked
     const selectedService = document.querySelector(`[data-id-service="${id}"]`);
-    if (selectedService.classList.contains('selected')) {
-        // Si ya está seleccionado, eliminarlo de la lista de servicios
-        appoinment.services = services.filter(s => s.id !== id);
+
+
+    // Check if the service is already selected
+    if (services.some(added => added.id === id)) {
+        // Delete selected service
+        appoinment.services = services.filter(added => added.id !== id);
         selectedService.classList.remove('selected');
     } else {
-        // Si no está seleccionado, agregarlo a la lista de servicios
+        // Add selected service
         appoinment.services = [...services, service];
         selectedService.classList.add('selected');
     }
+
 
     console.log(appoinment);
 }

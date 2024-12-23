@@ -19,17 +19,18 @@
         <p>Coloca tus datos y la fecha de tú cita</p>
         <form class="form">
             <div class="field">
-                <label for="name">Nombre</label>
-                <input type="text" id="name" name="name" placeholder="Nombre" value="<?php echo $name; ?>" disabled>
+                <label for="name">Tu nombre:</label>
+                <input class="name-input" type="text" id="name" name="name" placeholder="Nombre" value="<?php echo $name; ?>" disabled autocomplete="off">
+                <small>Este campo lo llenamos por ti. </small>
             </div>
 
             <div class="field">
-                <label for="date">Email</label>
+                <label for="date">Selecciona la fecha</label>
                 <input type="date" id="date">
             </div>
 
             <div class="field">
-                <label for="time">Hora</label>
+                <label for="time">Selecciona la hora</label>
                 <input type="time" id="time">
             </div>
         </form>
