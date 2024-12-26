@@ -21,6 +21,12 @@ function startApp() {
     previousPage(); // Go to the previous page
 
     consultAPI(); // Consult API in PHP backend
+    clientName(); // Get client name
+    clientDate(); // Get client date
+    clientTime(); // Get client hour
+
+    showResume(); // Show resume of the appoinment
+
 }
 
 function showSection() {
@@ -41,7 +47,7 @@ function showSection() {
         previousButton.classList.remove('current');
     }
 
-    // Change active button
+    // Change active button 
     const tab = document.querySelector(`[data-step="${step}"]`);
     tab.classList.add('current');
 }
@@ -68,6 +74,9 @@ function buttonsPager() {
     } else if (step === lastStep) {
         previousPage.classList.remove('hidden');
         nextPage.classList.add('hidden');
+
+        // Show resume
+        showResume();
     } else {
         previousPage.classList.remove('hidden');
         nextPage.classList.remove('hidden');
@@ -152,7 +161,141 @@ function selectService(service) {
         appoinment.services = [...services, service];
         selectedService.classList.add('selected');
     }
+}
 
+function clientName() {
+    appoinment.name= document.querySelector('#name').value;
+}
 
-    console.log(appoinment);
+function clientDate() {
+    const inputDate = document.querySelector('#date');
+    inputDate.addEventListener('input', e => {
+        const day = new Date(e.target.value).getUTCDay();
+        if ([0, 6].includes(day)) {
+            e.target.value = '';
+            showAlert('Lo siento, no trabajamos los fines de semana', 'error', '.form');
+        } else {
+            appoinment.date = e.target.value;
+        } 
+    });
+}
+
+function clientTime() {
+    const inputTime = document.querySelector('#time');
+    inputTime.addEventListener('input', e => {
+        const appoinmentTime = e.target.value;
+        const hour = appoinmentTime.split(':')[0];
+        if (hour < 8 || hour > 18) {
+            e.target.value = '';
+            showAlert('Lo siento, solo trabajamos de 10:00 a 18:00', 'error', '.form');
+        } else {
+            appoinment.time = appoinmentTime;
+            console.log(appoinment);
+        }
+    });
+}
+
+function showAlert(message, type, element, disappear = true) {
+
+    // If there is an alert, do not show another
+    const prevAlert = document.querySelector('.alert');
+    if (prevAlert) {
+        prevAlert.remove();
+    }
+
+    // Script to show the alert
+    const alert = document.createElement('DIV');
+    alert.textContent = message;
+    alert.classList.add('alert');
+    alert.classList.add(type);
+
+    const reference = document.querySelector(element);
+    reference.appendChild(alert);
+
+    if (disappear) {
+        // Disappear after 3 seconds
+        setTimeout(() => {
+            alert.remove();
+        }, 3000);
+    }
+
+}
+
+function showResume() {
+    const resume = document.querySelector('.resume-content');
+
+    // Remove previous resume
+    while (resume.firstChild) {
+        resume.removeChild(resume.firstChild);
+    }
+
+    if (Object.values(appoinment).includes('')  || appoinment.services.length === 0) {
+        showAlert('Todos los campos son obligatorios', 'error', '.resume-content', false);
+        return; 
+    } 
+
+    // Formatted resume
+    const { name, date, time, services } = appoinment;
+
+    // Header of the resume
+    const heading = document.createElement('H3');
+    heading.textContent = 'Servicios adquiridos';
+    resume.appendChild(heading);
+
+    // Iterate over services and show them in the resume
+    services.forEach(service => {
+        const { id, price, service_name } = service;
+        const containerService = document.createElement('DIV');
+        containerService.classList.add('container-service');
+
+        const serviceName = document.createElement('P');
+        serviceName.textContent = service_name;
+
+        const servicePrice = document.createElement('P');
+        servicePrice.innerHTML = `<span>Precio:</span> $ ${price}`;
+
+        containerService.appendChild(serviceName);
+        containerService.appendChild(servicePrice);
+
+        resume.appendChild(containerService);
+    });
+
+    // Header of the client
+    const headingClient = document.createElement('H3');
+    headingClient.textContent = 'Información de la cita';
+    resume.appendChild(headingClient);
+
+    const clientName = document.createElement('P');
+    clientName.innerHTML = `<span>Nombre:</span> ${name}`;
+
+    const clientDate = document.createElement('P');
+    // Format date
+    const formattedDate = new Date(date).toLocaleDateString('es-MX', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+    const capitalizedDate = formattedDate.charAt(0).toUpperCase() + formattedDate.slice(1);
+    // Show date
+    clientDate.innerHTML = `<span>Fecha:</span> ${capitalizedDate}`;
+
+    const clientTime = document.createElement('P');
+    const timeParts = time.split(':');
+    const hours = parseInt(timeParts[0]);
+    const minutes = timeParts[1];
+    const period = hours >= 12 ? 'PM' : 'AM';
+    const formattedTime = `${hours % 12 || 12}:${minutes} ${period}`;
+    clientTime.innerHTML = `<span>Hora:</span> ${formattedTime}`;
+
+    // Button to confirm the appoinment
+    const confirmButton = document.createElement('BUTTON');
+    confirmButton.classList.add('btn');
+    confirmButton.classList.add('btn-appoinment');
+    confirmButton.textContent = 'Confirmar cita';
+    confirmButton.onclick = bookAppoinment;
+
+    resume.appendChild(clientName);
+    resume.appendChild(clientDate);
+    resume.appendChild(clientTime);
+    resume.appendChild(confirmButton);
+}
+
+function bookAppoinment() {
+
 }

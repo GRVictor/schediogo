@@ -26,7 +26,7 @@
 
             <div class="field">
                 <label for="date">Selecciona la fecha</label>
-                <input type="date" id="date">
+                <input  type="date" id="date" min="<?php echo date('Y-m-d', strtotime('+1 day')); ?>">
             </div>
 
             <div class="field">
@@ -35,7 +35,7 @@
             </div>
         </form>
     </div>
-    <div id="step-3" class="section">
+    <div id="step-3" class="section resume-content">
         <h2>Resumen</h2>
         <p>Confirma los datos de tu cita</p>
     </div>

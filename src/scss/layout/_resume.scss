@@ -1,0 +1,30 @@
+@use 'base/variables' as v;
+
+
+.resume-content{
+    p {
+        margin-bottom: 1rem;
+    }
+
+    span {
+        color: v.$black;
+        font-weight: v.$bold;
+        font-size: 2.5rem;
+    }
+
+    .btn-appoinment {
+        align-content: center;
+        margin-top: 2rem;
+    }   
+
+}
+
+.container-service {
+    padding: 0 0 2rem 0;
+    border-bottom: 1px solid v.$black;
+
+    &:last-of-type {
+        margin-bottom: calc(v.$spacing / 2);
+    }
+}
+
