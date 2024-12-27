@@ -297,5 +297,12 @@ function showResume() {
 }
 
 function bookAppoinment() {
+    
+    const data = new FormData();
+    data.append('name', appoinment.name);
 
+    // API request
+    const url = 'http://localhost:3000/api/appoinments';
+
+    // console.log([...appoinment.services]); // Convert object to array to see what are you sending to the backend
 }
