@@ -190,7 +190,7 @@ function clientTime() {
             showAlert('Lo siento, solo trabajamos de 10:00 a 18:00', 'error', '.form');
         } else {
             appoinment.time = appoinmentTime;
-            console.log(appoinment);
+            // console.log(appoinment);
         }
     });
 }
@@ -296,13 +296,26 @@ function showResume() {
     resume.appendChild(confirmButton);
 }
 
-function bookAppoinment() {
+async function bookAppoinment() {
     
+    // Destructuring appoinment
+    const { name, date, time, services } = appoinment;
+    const idServices = services.map(service => service.id);
     const data = new FormData();
-    data.append('name', appoinment.name);
+    data.append('name', name);
+    data.append('date', date);
+    data.append('time', time);
+    data.append('services', idServices);
 
     // API request
-    const url = 'http://localhost:3000/api/appoinments';
+    const url = 'http://localhost:3000/api/appointments';
+    
+    const reply = await fetch(url, {
+        method: 'POST',
+        body: data
+    });
 
+    const result = await reply.json();
+    console.log(result);
     // console.log([...appoinment.services]); // Convert object to array to see what are you sending to the backend
 }
