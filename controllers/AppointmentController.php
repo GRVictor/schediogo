@@ -1,5 +1,5 @@
 <?php
-
+ 
 namespace Controllers;
 
 use MVC\Router;
@@ -12,8 +12,11 @@ class AppointmentController {
             session_start();
         }
 
+        isAuth();
+
         $router->render('appointment/index', [
             'name' => $_SESSION['name'] ?? null,
+            'id' => $_SESSION['id'] ?? null
         ]);
     }
 }

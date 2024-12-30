@@ -1,6 +1,11 @@
 <h1 class="page-name">Crea una nueva cita</h1>
 <p class="page-description">Sigue los pasos para crear una nueva cita</p>
 
+<div class="profile-bar">
+    <p>Hola, <span><?php echo $name ?? ''; ?></span></p>
+    <a href="/logout" class="btn-logout">Cerrar sesión</a>
+</div>
+
 <div class="app">
 
     <nav class="tabs">
@@ -33,6 +38,7 @@
                 <label for="time">Selecciona la hora</label>
                 <input type="time" id="time">
             </div>
+            <input type="hidden" id="client_id" value="<?php echo $id; ?>">
         </form>
     </div>
     <div id="step-3" class="section resume-content">
@@ -48,5 +54,9 @@
 </div>
 
 <?php 
-    $script = "<script src='/build/js/app.js'></script>";
+    $script = "
+    <link href='https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@4/bulma.css' rel='stylesheet'>
+    <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+    <script src='/build/js/app.js'></script>
+    ";
 ?>
