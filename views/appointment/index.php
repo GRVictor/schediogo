@@ -1,10 +1,9 @@
 <h1 class="page-name">Crea una nueva cita</h1>
 <p class="page-description">Sigue los pasos para crear una nueva cita</p>
 
-<div class="profile-bar">
-    <p>Hola, <span><?php echo $name ?? ''; ?></span></p>
-    <a href="/logout" class="btn-logout">Cerrar sesión</a>
-</div>
+<?php 
+    include_once __DIR__ . '/../templates/profile-bar.php'; 
+?>
 
 <div class="app">
 

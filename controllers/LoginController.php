@@ -11,18 +11,17 @@ class LoginController {
     public static function login(Router $router) {
         $alerts = [];
 
-        if($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $auth = new User($_POST);
 
             $alerts = $auth->validateLogin();
 
-            if(empty($alerts)) {
+            if (empty($alerts)) {
                 $user = User::where('email', $auth->email);
 
-                if($user) {
+                if ($user) {
                     // Verify password
-
-                    if($user -> validatePassword($auth->password)){
+                    if ($user->validatePassword($auth->password)) {
                         // Authenticate user
                         session_start();
                         $_SESSION['id'] = $user->id;
@@ -31,31 +30,28 @@ class LoginController {
                         $_SESSION['login'] = true;
 
                         // Redirect
-
-                        if($user->admin == 1) {
+                        if ($user->admin == 1) {
                             $_SESSION['admin'] = $user->admin ?? null;
                             header('Location: /admin');
                         } else {
                             header('Location: /appointment');
-
+                        }
+                    } else {
+                        if (empty(User::getAlerts())) {
+                            User::setAlert('error', 'La contraseña es incorrecta');
+                        }
                     }
-
-                    
                 } else {
                     User::setAlert('error', 'El usuario no existe');
                 }
-
             }
-
         }
-    }
 
         $alerts = User::getAlerts();
 
         $router->render('auth/login', [
             'alerts' => $alerts
         ]);
-
     }
 
     public static function logout() {

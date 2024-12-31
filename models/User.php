@@ -131,13 +131,14 @@ class User extends ActiveRecord {
     public function validatePassword($password) {
         $result = password_verify($password, $this->password);
 
-        if(!$result) {
-            self::$alerts['error'][] = 'La contraseña es incorrecta';
-        } else if(!$this->confirmed) {
-            self::$alerts['error'][] = 'La cuenta no está confirmada';
-        } else {
-            return true;
-        }
+            if(!$result) {
+                return false;
+            } else if(!$this->confirmed) {
+                self::$alerts['error'][] = 'La cuenta no está confirmada';
+                return false;
+            } else {
+                return true;
+            }
 
     }
 
