@@ -1,9 +1,9 @@
 @use 'base/variables' as v;
 
-
-.resume-content{
+.resume-content {
     p {
-        margin-bottom: 1rem;
+        margin-bottom: 0.5rem;
+        text-align: left;
     }
 
     span {
@@ -13,18 +13,17 @@
     }
 
     .btn-appoinment {
-        align-content: center;
         margin-top: 2rem;
-    }   
-
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+    }
 }
 
 .container-service {
     padding: 0 0 2rem 0;
-    border-bottom: 1px solid v.$black;
 
     &:last-of-type {
         margin-bottom: calc(v.$spacing / 2);
     }
 }
-

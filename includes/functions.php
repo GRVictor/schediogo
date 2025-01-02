@@ -13,6 +13,13 @@ function s($html) : string {
     return $s;
 }
 
+function itIsLast($currentKey, $next) : bool {
+    if($currentKey !== $next) {
+        return true;
+    }
+    return false;
+}
+
 // Check if the user is authenticated
 function isAuth() : void {
     if(!isset($_SESSION['login'])) {

@@ -130,6 +130,12 @@ class ActiveRecord {
         return array_shift( $result ) ;
     }
 
+    // Flat Query SQL (Use it when the model is not enough)
+    public static function SQL($query) {
+        $result = self::querySQL($query);
+        return $result;
+    }
+
     // crea un nuevo registro
     public function create() {
         // Sanitizar los datos

@@ -1,9 +1,3 @@
- <!--
- : ¨·.·¨ : 
-  ` ·. C 
- -->
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,7 +18,20 @@
 
         </div>
         <div class="app">
-            <img class="logo" src="../build/img/logo.webp" alt="logo">
+            <?php
+                if (session_status() === PHP_SESSION_NONE) {
+                    session_start();
+                }
+                $redirectUrl = '';
+                if (isset($_SESSION['admin']) && $_SESSION['admin'] == 1) {
+                    $redirectUrl = '/admin';
+                } elseif (isset($_SESSION['admin']) && $_SESSION['admin'] == 0) {
+                    $redirectUrl = '/appointment';
+                }
+            ?>
+            <a href="<?php echo $redirectUrl; ?>">
+                <img class="logo" src="../build/img/logo.webp" alt="logo">
+            </a>
             <?php echo $content; ?>
         </div>
     </div>
