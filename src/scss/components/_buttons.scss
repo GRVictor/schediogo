@@ -1,6 +1,16 @@
 @use 'base/variables' as v;
 @use 'base/mixins' as m;
+@use 'sass:color';
 
 .btn {
     @include m.btn(v.$black, v.$white);
+}
+
+.btn-delete {
+    margin-left: auto;
+    @include m.btn(v.$red, v.$white);
+
+    &:hover {
+        background-color: color.adjust(v.$red, $lightness: -7%);
+    }
 }

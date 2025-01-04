@@ -11,38 +11,48 @@
 .container-app {
     display: flex;
     flex-direction: column;
-    align-items: center; // Centra los elementos horizontalmente
-    justify-content: center; // Centra los elementos verticalmente
     min-height: 100vh;
-    position: relative; // Asegura que el contenido se posicione correctamente
 
     @include m.tablet {
         display: grid;
-        grid-template-columns: 1fr 1fr; // Dos columnas, una para la imagen y otra para el contenido
+        grid-template-columns: 1fr 1fr;
         min-height: 100vh;
     }
 
     .image {
-        height: 100%; // Asegura que la imagen ocupe toda la altura disponible
+        height: 100%;
         background-image: url('../img/person.webp');
         background-size: 70%;
         background-position: center center;
         background-repeat: no-repeat;
-        position: relative; // Mantiene la imagen en su lugar
+        position: relative;
 
         @include m.tablet {
-            height: 100vh; // Asegura que la imagen ocupe toda la altura de la pantalla
+            height: 100vh;
         }
     }
 
     .app {
+        display: flex;
         flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        width: 95%;
-        margin: 0 auto;
-        padding: 3rem 0;
-        z-index: 1; // Asegura que el contenido esté por encima de la imagen de fondo
+        justify-content: flex-start; // Asegura que el contenido comience desde la parte superior
+        width: 100%; // Ajusta el ancho para que ocupe todo el contenedor
+        margin: 0; // Elimina el margen lateral
+        padding: 3rem 2rem; // Añade padding lateral para mantener el contenido separado de los bordes
+        z-index: 1;
+        height: 100vh;
+        overflow-y: auto;
+
+        &.centered {
+            justify-content: center; // Centra el contenido verticalmente
+        }
+
+        @include m.tablet {
+            overflow-y: auto;
+        }
+    }
+    .app::-webkit-scrollbar {
+        display: none;
     }
 }
 
@@ -50,6 +60,9 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    width: 100%; // Asegura que la barra de perfil ocupe todo el ancho del contenedor
+    padding: 1rem; // Añade un poco de espacio alrededor de la barra de perfil
+
     p {
         margin-right: 2rem;
         span {
@@ -57,6 +70,7 @@
             text-decoration: underline;
         }
     }
+
     .btn-logout {
         background-color: v.$white;
         color: v.$black;

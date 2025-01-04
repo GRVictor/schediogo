@@ -9,13 +9,17 @@
     <form action="" class="form">
         <div class="field">
             <label for="date">Fecha</label>
-            <input type="date" id="date" name="date">
+            <input type="date" id="date" name="date" value="<?php echo $date; ?>">
         </div>
     </form>
 </div>
 
 <div id="appointments-admin">
     <h2>Citas del día</h2>
+    <?php
+        if (empty($appointments)) { ?>
+            <h2>No hay citas para este día</h2>
+    <?php } ?>
     <ul class="appointments">
         <?php
             $idAppointment = null; 
@@ -48,6 +52,10 @@
 
                 if(itIsLast($currentKey, $next)) { ?>
                     <p class="total">Total: $<?php echo $total; ?></p>
+                    <form action="/api/delete" method="POST" class="delete-form">
+                        <input type="hidden" name="id" value="<?php echo $appointment->id; ?>">
+                        <input type="submit" value="Eliminar" class="btn btn-delete">
+                    </form>
             <?php
                 } // Closing bracket for if - itIsLast
             } // Closing bracket for foreach - $appointments
@@ -55,3 +63,8 @@
         </li> <!-- Cierra el último <li> -->
     </ul>
 </div>
+
+<?php
+    $script = '<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>';
+    $script .= '<script src="build/js/seeker.js"></script>';
+?>

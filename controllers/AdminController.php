@@ -12,6 +12,15 @@ class AdminController {
             session_start();
         }
 
+        isAdmin();
+
+        $date = $_GET['date'] ?? date('Y-m-d');
+        $dateInt = explode('-', $date);
+
+        if (!checkdate($dateInt[1], $dateInt[2], $dateInt[0])) {
+            header('Location: /404');
+        } 
+        
         // Database query
         $consult = "SELECT appointments.id, appointments.time, CONCAT( users.name, ' ', users.last_name) as client, ";
         $consult .= " users.email, users.phone, services.service_name as service, services.price  ";
@@ -22,13 +31,14 @@ class AdminController {
         $consult .= " ON appointmentsservices.appointmentId=appointments.id ";
         $consult .= " LEFT OUTER JOIN services ";
         $consult .= " ON services.id=appointmentsservices.serviceId ";
-        // $consulta .= " WHERE date =  '${date}' ";
+        $consult .= " WHERE date =  '${date}' ";
 
         $appointments = AdminAppointment::SQL($consult);
 
         $router->render('admin/index', [
            'name' => $_SESSION['name'],
-            'appointments' => $appointments
+            'appointments' => $appointments,
+            'date' => $date
         ]);
     }
 }

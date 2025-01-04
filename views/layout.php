@@ -1,3 +1,6 @@
+<?php
+    $isCenteredPage = in_array($_SERVER['REQUEST_URI'], ['/', '/sign-up', '/forgot', '/activate', '/recover']);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,10 +17,8 @@
 </head>
 <body>
     <div class="container-app">
-        <div class="image">
-
-        </div>
-        <div class="app">
+        <div class="image"></div>
+        <div class="app <?php echo $isCenteredPage ? 'centered' : ''; ?>">
             <?php
                 if (session_status() === PHP_SESSION_NONE) {
                     session_start();
