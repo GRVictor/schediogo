@@ -183,7 +183,7 @@ class ActiveRecord {
 
     // Eliminar un Registro por su ID
     public function delete() {
-        $query = "DELETE FROM "  . static::$table . " WHERE id = " . self::$db->escape_string($this->id) . " LIMIT 1";
+        $query = "DELETE FROM " . static::$table . " WHERE id = " . self::$db->escape_string($this->id) . " LIMIT 1";
         $result = self::$db->query($query);
         return $result;
     }

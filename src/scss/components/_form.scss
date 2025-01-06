@@ -23,12 +23,12 @@
     }
 
     input {
-        all: unset;
         width: 100%; // Asegura que el input ocupe todo el ancho disponible
         text-align: center; // Centra el texto del input
         border: 2px solid v.$black;
         padding: calc(v.$spacing / 4);
         border-radius: 1rem;
+        margin-bottom: 1rem;
         @include m.phone {
             width: 30rem;
         }

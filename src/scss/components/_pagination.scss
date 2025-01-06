@@ -8,6 +8,7 @@
         display: flex;
         padding: v.$spacing;
         justify-content: space-between;
+        flex-wrap: wrap; // Permite que los elementos se envuelvan en múltiples líneas si es necesario
     }
 
     .space {
@@ -16,6 +17,7 @@
 
     button {
         margin: 0 0 1rem 0;
+        flex: 1 1 auto; // Permite que los botones se ajusten al espacio disponible
     }
 }
 
