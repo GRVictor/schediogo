@@ -2,7 +2,7 @@
 <p class="page-description">Crea un nuevo servicio</p>
 
 <?php 
-    // include_once __DIR__ . '/../templates/profile-bar.php';
+    include_once __DIR__ . '/../templates/profile-bar.php';
     include_once __DIR__ . '/../templates/alerts.php';
 ?>
 

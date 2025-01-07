@@ -1,5 +1,5 @@
 <?php
-    $isCenteredPage = in_array($_SERVER['REQUEST_URI'], ['/', '/sign-up', '/forgot', '/activate', '/recover', '/services/create']);
+    $isCenteredPage = in_array($_SERVER['REQUEST_URI'], ['/', '/sign-up', '/forgot', '/activate', '/recover']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
