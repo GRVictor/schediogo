@@ -28,6 +28,7 @@ function startApp() {
   clientTime(); // Get client hour
 
   showResume(); // Show resume of the appoinment
+  confirmDelete(); // Confirm delete of a service
 }
 
 function showSection() {
@@ -360,4 +361,3 @@ async function bookAppoinment() {
     });
   }
 }
-

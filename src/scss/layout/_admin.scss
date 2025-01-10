@@ -1,4 +1,5 @@
 @use 'base/variables' as v;
+@use 'base/mixins' as m;
 @use 'sass:color';
 
 .appointments {
@@ -41,4 +42,16 @@
     li {
         text-align: center;
     }
+
+    .actions {
+        margin: 0;
+    }
+    .btn, .btn--delete {
+        margin: 0;
+        margin-bottom: 3rem;
+        @include m.phone {
+            margin: 1rem;
+        }
+    }
+
 }

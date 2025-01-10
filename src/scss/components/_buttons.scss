@@ -14,3 +14,11 @@
         background-color: color.adjust(v.$red, $lightness: -7%);
     }
 }
+
+.btn-edit {
+    @include m.btn(v.$green, v.$white!important);
+
+    &:hover {
+        background-color: color.adjust(v.$green, $lightness: -7%);
+    }
+}
