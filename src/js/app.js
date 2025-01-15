@@ -26,9 +26,7 @@ function startApp() {
   clientName(); // Get client name
   clientDate(); // Get client date
   clientTime(); // Get client hour
-
   showResume(); // Show resume of the appoinment
-  confirmDelete(); // Confirm delete of a service
 }
 
 function showSection() {
